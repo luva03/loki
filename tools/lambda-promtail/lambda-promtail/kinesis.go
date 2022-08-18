@@ -11,7 +11,7 @@ import (
 
 func parseKinesisEvent(ctx context.Context, b *batch, ev *events.KinesisEvent) error {
 	for _, record := range ev.Records {
-		timestamp := time.UnixMilli(record.Kinesis.ApproximateArrivalTimestamp.Unix())
+		timestamp := time.Unix(record.Kinesis.ApproximateArrivalTimestamp.Unix(),0)
 
 		labels := model.LabelSet{
 			model.LabelName("__aws_log_type"):                 model.LabelValue("kinesis"),
